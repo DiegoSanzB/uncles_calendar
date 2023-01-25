@@ -1,0 +1,3 @@
+Folder for dumping images for calendar and other temporary images
+
+Images for the calendar should be renamed to 0 - 12 .png
