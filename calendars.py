@@ -50,8 +50,44 @@ def get_template(side, save = None):
 
     return template
 
-def enumerate_template(grid, side, save):
-    pass
+def enumerate_template(days, template, side, save):
+    try:
+        side_x, side_y = side
+    except:
+        side_x = side
+        side_y = side
+
+    try:
+        first_day, past_day, total_days = days
+    except:
+        print('Wrong format for days')
+        return -1
+
+    draw = ImageDraw.Draw(template)
+    font_number = ImageFont.truetype("comicbd.ttf", side_x//5)
+    number = past_day - first_day
+    
+    j = 1
+    for i in range(7):    
+        number = number % past_day
+        draw.text([i*side_x + 10 + side_x/2, j*side_y + 10 + side_y/2], text=str(number + 1), fill='red', anchor='mm', font=font_number, spacing=0, align='center')
+        number += 1
+    
+    for j in range(2, 7):
+        for i in range(7):    
+            number = number % total_days
+            draw.text([i*side_x + 10 + side_x/2, j*side_y + 10 + side_y/2], text=str(number + 1), fill='red', anchor='mm', font=font_number, spacing=0, align='center')
+            number += 1
+
+    if save is not None:
+        try:
+            template.save(save)
+        except:
+            print('save is not a valid path to save')
+
+    return template
 
 if __name__ == '__main__':
-    get_template((200, 120), save='imgs/grid.png')
+    side = (200, 120)
+    template = get_template(side)
+    enumerate_template((0, 31, 31), template, side, save='imgs/grid.png')
