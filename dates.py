@@ -1,7 +1,6 @@
 import numpy as np
 
 # CONSTANTS
-
 REFERENCE_YEAR = 1000
 JAN_01_REF = 2
 
